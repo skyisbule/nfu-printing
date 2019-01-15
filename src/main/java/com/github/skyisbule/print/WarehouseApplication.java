@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableSwagger2Doc
 @EnableTransactionManagement
-@MapperScan("com.github.skyisbule.wxpay.dao")
+@MapperScan("com.github.skyisbule.print.*")
 @SpringBootApplication
 public class WarehouseApplication extends SpringBootServletInitializer {
   public static void main(String[] args) {

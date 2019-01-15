@@ -1,15 +1,10 @@
 package com.github.skyisbule.print.controller;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.hutool.json.JSONUtil;
-import com.github.skyisbule.print.domain.RequireCodePicCache;
-import com.github.skyisbule.print.domain.User;
-import com.github.skyisbule.print.domain.WarehouseCodePicCache;
 import com.github.skyisbule.print.service.QiniuService;
 import me.chanjar.weixin.common.error.WxErrorException;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.*;
 
 /**
  * 微信小程序用户接口
@@ -32,17 +26,13 @@ public class WxMaUserController {
     @Autowired
     private WxMaService wxService;
 
-    @Autowired
-    private UserService userService;
+  /*  @Autowired
+    private UserService userService;*/
 
     @Autowired
     private QiniuService qiniuService;
 
-    @Autowired
-    RequireCodePicCacheMapper requireCodePicCacheMapper;
 
-    @Autowired
-    WarehouseCodePicCacheMapper warehouseCodePicCacheMapper;
 
    // @Autowired
    // private WxMaQrcodeService qrcodeService;
@@ -53,45 +43,10 @@ public class WxMaUserController {
     }
 
 
-
-    @RequestMapping("/createCodeRequire")
-    public String createCodeRequire(int rid) throws WxErrorException {
-        RequireCodePicCache cache = requireCodePicCacheMapper.selectByPrimaryKey(rid);
-        if (cache!=null)
-            return cache.getUrl();
-        File file = wxService.getQrcodeService().createWxaCodeUnlimit(
-                String.valueOf(rid),
-                "pages/needDetail/needDetail"
-                  );
-        String url =  qiniuService.doUpload(file.getPath());
-        cache = new RequireCodePicCache();
-        cache.setRid(rid);
-        cache.setUrl(url);
-        requireCodePicCacheMapper.insert(cache);
-        return url;
-    }
-
-    @RequestMapping("/createCodeWarehouse")
-    public String createCodeWarehouse(int wid) throws WxErrorException {
-        WarehouseCodePicCache cache = warehouseCodePicCacheMapper.selectByPrimaryKey(wid);
-        if (cache!=null)
-            return cache.getUrl();
-        File file = wxService.getQrcodeService().createWxaCodeUnlimit(
-                String.valueOf(wid),
-                "pages/warehouseDetail/warehouseDetail"
-        );
-        String url = qiniuService.doUpload(file.getPath());
-        cache = new WarehouseCodePicCache();
-        cache.setWid(wid);
-        cache.setUrl(url);
-        warehouseCodePicCacheMapper.insert(cache);
-        return url;
-    }
-
     /**
      * 登陆接口
      */
-    @GetMapping("/login")
+/*    @GetMapping("/login")
     public String login(String code) {
         if (StringUtils.isBlank(code)) {
             return "empty jscode";
@@ -112,7 +67,7 @@ public class WxMaUserController {
             this.logger.error(e.getMessage(), e);
             return e.toString();
         }
-    }
+    }*/
 
     /**
      * <pre>
