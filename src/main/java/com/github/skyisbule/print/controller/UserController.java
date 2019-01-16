@@ -7,7 +7,6 @@ import com.github.skyisbule.print.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +54,16 @@ public class UserController {
     public BaseHttpResponse<User> getStatus() throws GlobalException {
         try {
             return new BaseHttpResponse<>(userService.getUser());
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
+    @ApiOperation("根据uid获取用户信息")
+    @RequestMapping("/get-by-uid")
+    public BaseHttpResponse<User> getByUid(Integer uid) throws GlobalException {
+        try {
+            return new BaseHttpResponse<>(userService.getByUid(uid));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }

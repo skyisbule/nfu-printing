@@ -78,4 +78,12 @@ public class UserService {
         return users.get(0);
     }
 
+    public User getByUid(Integer uid) throws GlobalException {
+        User user = userDao.selectByPrimaryKey(uid);
+        if (user == null)
+            throw new GlobalException(ErrorConstant.UID_NOT_EXISTS);
+        user.setPasswd(null);
+        return user;
+    }
+
 }

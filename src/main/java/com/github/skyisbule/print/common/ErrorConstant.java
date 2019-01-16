@@ -10,4 +10,7 @@ public class ErrorConstant {
     public static final String ACCOUNT_OR_PASSWD_ERROR = "10003";
     /**登陆状态失效**/
     public static final String FAILURE_OF_LOGIN_STATUS = "10004";
+    /**用户不存在**/
+    public static final String UID_NOT_EXISTS          = "10005";
+
 }
