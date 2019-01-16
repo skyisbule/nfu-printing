@@ -1,5 +1,7 @@
 package com.github.skyisbule.print;
 
+import cn.hutool.setting.dialect.Props;
+import com.github.skyisbule.print.exception.ExceptionMessage;
 import com.spring4all.swagger.EnableSwagger2Doc;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +16,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 public class WarehouseApplication extends SpringBootServletInitializer {
   public static void main(String[] args) {
+
+    Props props = new Props("errorMessage.properties");
+    props.forEach((key, value) -> {
+        ExceptionMessage.message.put(key.toString(),value.toString());
+    });
+
     SpringApplication.run(WarehouseApplication.class, args);
   }
 
