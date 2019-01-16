@@ -52,11 +52,15 @@ swagger:
   title: swagger
   description: skyisbule.github.com
   version: 1.0
-  base-package: com.github.skyisbule.wxpay.controller
+  base-package: com.github.skyisbule.print.controller
   base-path: /**
   exclude-path: /error,/ops/**
   apply-default-response-messages: false
   global-response-message:
+    get[0]:
+      code: 500
+      message: server error
+      modelRef: error
     get[1]:
       code: 500
       message: server error
