@@ -60,6 +60,8 @@ public class UserService {
     public User getUser() throws GlobalException {
         int uid = 1;
         String passwd = "";
+        if (request.getCookies() == null)
+            throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals("session")){
                 passwd = Security.decode(cookie.getValue());
@@ -68,6 +70,8 @@ public class UserService {
                 uid = Integer.parseInt(cookie.getValue());
             }
         }
+        if (uid == 1 && passwd.equals(""))
+            throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
         UserExample e = new UserExample();
         e.createCriteria()
                 .andUidEqualTo(uid)
