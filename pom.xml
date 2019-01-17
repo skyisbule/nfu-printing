@@ -14,7 +14,7 @@
     <artifactId>printing</artifactId>
     <packaging>jar</packaging>
 
-    <name>warehouse</name>
+    <name>print</name>
     <description>南苑打印平台</description>
 
     <properties>
@@ -61,11 +61,11 @@
         </dependency>
 
         <!-- Testing Dependencies -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- Spring Boot Mybatis 依赖 -->
         <dependency>
@@ -81,16 +81,16 @@
             <version>${mysql-connector}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+        </dependency>-->
         <!--这里用于降低安全等级-->
-        <dependency>
+        <!--<dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
             <version>1.9.22</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -105,23 +105,23 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.caspar-chen</groupId>
             <artifactId>swagger-ui-layer</artifactId>
             <version>0.0.6</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.qiniu</groupId>
