@@ -19,9 +19,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @ApiOperation("用户注册接口")
+    @ApiOperation("用户注册接口,会返回uid，且若是用户名密码注册，则passwd字段会返回加密后的value，请前端直接将其写入cookie，uid同理，和登录接口一样。")
     @RequestMapping("/register")
-    public BaseHttpResponse<String> doRegister(User user) throws GlobalException {
+    public BaseHttpResponse<User> doRegister(User user) throws GlobalException {
         try{
             return new BaseHttpResponse<>(userService.doRegister(user));
         }catch (Exception e){

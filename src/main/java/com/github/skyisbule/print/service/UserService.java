@@ -8,6 +8,7 @@ import com.github.skyisbule.print.domain.UserExample;
 import com.github.skyisbule.print.exception.GlobalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +22,23 @@ public class UserService {
     @Autowired
     HttpServletRequest request;
 
-    public String doRegister(User user) throws GlobalException {
+    @Transactional(rollbackFor = Exception.class)
+    public User doRegister(User user) throws GlobalException {
+        user.setUid(null);
+        user.setOpenShop(0);
         UserExample e = new UserExample();
         e.createCriteria()
                 .andNickNameEqualTo(user.getNickName());
-        int userCount = (int)userDao.countByExample(e);
-        if (userCount>0){
+        int userCount = (int) userDao.countByExample(e);
+        if (userCount > 0) {
             throw new GlobalException(ErrorConstant.ACCOUNT_ALREADY_EXISTS);
         }
         userDao.insert(user);
-        return "注册成功";
+        int uid = userDao.getMaxForUser();
+        user.setUid(uid);
+        if (user.getPasswd() != null)
+            user.setPasswd(Security.encode(user.getPasswd()));
+        return user;
     }
 
     public User getUserByOpenId(String openId) throws GlobalException {
@@ -38,7 +46,7 @@ public class UserService {
         e.createCriteria()
                 .andOpenIdEqualTo(openId);
         List<User> users = userDao.selectByExample(e);
-        if (users == null || users.size()==0){
+        if (users == null || users.size() == 0) {
             throw new GlobalException(ErrorConstant.USER_NOT_EXISTS);
         }
         User user = users.get(0);
@@ -46,7 +54,7 @@ public class UserService {
         return user;
     }
 
-    public String doLogin(String account,String passwd) throws GlobalException {
+    public String doLogin(String account, String passwd) throws GlobalException {
         UserExample e = new UserExample();
         e.createCriteria()
                 .andNickNameEqualTo(account)
@@ -63,10 +71,10 @@ public class UserService {
         if (request.getCookies() == null)
             throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
         for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals("session")){
+            if (cookie.getName().equals("session")) {
                 passwd = Security.decode(cookie.getValue());
             }
-            if (cookie.getName().equals("uid")){
+            if (cookie.getName().equals("uid")) {
                 uid = Integer.parseInt(cookie.getValue());
             }
         }
@@ -77,7 +85,7 @@ public class UserService {
                 .andUidEqualTo(uid)
                 .andPasswdEqualTo(passwd);
         List<User> users = userDao.selectByExample(e);
-        if (users == null || users.size()==0)
+        if (users == null || users.size() == 0)
             throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
         return users.get(0);
     }
