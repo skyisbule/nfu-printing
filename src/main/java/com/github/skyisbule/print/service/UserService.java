@@ -19,8 +19,6 @@ public class UserService {
 
     @Autowired
     UserDao userDao;
-    @Autowired
-    HttpServletRequest request;
 
     @Transactional(rollbackFor = Exception.class)
     public User doRegister(User user) throws GlobalException {
@@ -65,7 +63,7 @@ public class UserService {
         return Security.encode(users.get(0).getPasswd());
     }
 
-    public User getUser() throws GlobalException {
+    public User getUser(HttpServletRequest request) throws GlobalException {
         int uid = 1;
         String passwd = "";
         if (request.getCookies() == null)

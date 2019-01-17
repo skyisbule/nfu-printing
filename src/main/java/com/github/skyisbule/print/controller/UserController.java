@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(value = "/api/user",method = {RequestMethod.GET,RequestMethod.POST})
 @Api(description = "用户相关的接口")
@@ -51,9 +53,9 @@ public class UserController {
 
     @ApiOperation("验证当前用户的登陆状态")
     @RequestMapping("/check-self")
-    public BaseHttpResponse<User> getStatus() throws GlobalException {
+    public BaseHttpResponse<User> getStatus(HttpServletRequest request) throws GlobalException {
         try {
-            return new BaseHttpResponse<>(userService.getUser());
+            return new BaseHttpResponse<>(userService.getUser(request));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }
