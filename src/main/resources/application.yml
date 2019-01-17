@@ -52,7 +52,7 @@ swagger:
   title: swagger
   description: skyisbule.github.com
   version: 1.0
-  base-package: com.github.skyisbule.print.controller
+  base-package: com.github.skyisbule.print
   base-path: /**
   exclude-path: /error,/ops/**
   apply-default-response-messages: false
