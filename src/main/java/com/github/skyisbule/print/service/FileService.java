@@ -118,7 +118,7 @@ public class FileService {
         if (pageSize == 10)pageSize=10;
 
         DbFileExample e = new DbFileExample();
-        e.setOffset((long)page*10);
+        e.setOffset((long)page*pageSize);
         e.setLimit(pageSize);
         e.createCriteria()
                 .andUidEqualTo(uid)

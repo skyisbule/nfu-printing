@@ -12,7 +12,7 @@ public class Order implements Serializable {
 
     private Integer sid;
 
-    private String uid;
+    private Integer uid;
 
     private String fileName;
 
@@ -40,11 +40,11 @@ public class Order implements Serializable {
         this.sid = sid;
     }
 
-    public String getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 

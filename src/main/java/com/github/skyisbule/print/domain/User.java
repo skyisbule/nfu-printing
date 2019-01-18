@@ -27,6 +27,10 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public boolean isAdmin(){
+        return this.uid == 1;
+    }
+
     public Integer getUid() {
         return uid;
     }

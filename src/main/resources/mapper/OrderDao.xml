@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.github.skyisbule.print.domain.Order">
     <id column="oid" jdbcType="INTEGER" property="oid" />
     <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
     <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
@@ -113,7 +113,7 @@
     insert into db_order (sid, `uid`, file_name, 
       file_url, requirement, upload_time
       )
-    values (#{sid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+    values (#{sid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
       #{fileUrl,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -144,7 +144,7 @@
         #{sid,jdbcType=INTEGER},
       </if>
       <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="fileName != null">
         #{fileName,jdbcType=VARCHAR},
@@ -176,7 +176,7 @@
         sid = #{record.sid,jdbcType=INTEGER},
       </if>
       <if test="record.uid != null">
-        `uid` = #{record.uid,jdbcType=VARCHAR},
+        `uid` = #{record.uid,jdbcType=INTEGER},
       </if>
       <if test="record.fileName != null">
         file_name = #{record.fileName,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
     update db_order
     set oid = #{record.oid,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=INTEGER},
-      `uid` = #{record.uid,jdbcType=VARCHAR},
+      `uid` = #{record.uid,jdbcType=INTEGER},
       file_name = #{record.fileName,jdbcType=VARCHAR},
       file_url = #{record.fileUrl,jdbcType=VARCHAR},
       requirement = #{record.requirement,jdbcType=VARCHAR},
@@ -215,7 +215,7 @@
         sid = #{sid,jdbcType=INTEGER},
       </if>
       <if test="uid != null">
-        `uid` = #{uid,jdbcType=VARCHAR},
+        `uid` = #{uid,jdbcType=INTEGER},
       </if>
       <if test="fileName != null">
         file_name = #{fileName,jdbcType=VARCHAR},
@@ -235,7 +235,7 @@
   <update id="updateByPrimaryKey" parameterType="com.github.skyisbule.print.domain.Order">
     update db_order
     set sid = #{sid,jdbcType=INTEGER},
-      `uid` = #{uid,jdbcType=VARCHAR},
+      `uid` = #{uid,jdbcType=INTEGER},
       file_name = #{fileName,jdbcType=VARCHAR},
       file_url = #{fileUrl,jdbcType=VARCHAR},
       requirement = #{requirement,jdbcType=VARCHAR},

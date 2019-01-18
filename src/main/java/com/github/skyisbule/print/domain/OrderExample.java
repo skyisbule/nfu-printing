@@ -255,62 +255,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andUidEqualTo(String value) {
+        public Criteria andUidEqualTo(Integer value) {
             addCriterion("`uid` =", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotEqualTo(String value) {
+        public Criteria andUidNotEqualTo(Integer value) {
             addCriterion("`uid` <>", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThan(String value) {
+        public Criteria andUidGreaterThan(Integer value) {
             addCriterion("`uid` >", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThanOrEqualTo(String value) {
+        public Criteria andUidGreaterThanOrEqualTo(Integer value) {
             addCriterion("`uid` >=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThan(String value) {
+        public Criteria andUidLessThan(Integer value) {
             addCriterion("`uid` <", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThanOrEqualTo(String value) {
+        public Criteria andUidLessThanOrEqualTo(Integer value) {
             addCriterion("`uid` <=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidLike(String value) {
-            addCriterion("`uid` like", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotLike(String value) {
-            addCriterion("`uid` not like", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidIn(List<String> values) {
+        public Criteria andUidIn(List<Integer> values) {
             addCriterion("`uid` in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotIn(List<String> values) {
+        public Criteria andUidNotIn(List<Integer> values) {
             addCriterion("`uid` not in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidBetween(String value1, String value2) {
+        public Criteria andUidBetween(Integer value1, Integer value2) {
             addCriterion("`uid` between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotBetween(String value1, String value2) {
+        public Criteria andUidNotBetween(Integer value1, Integer value2) {
             addCriterion("`uid` not between", value1, value2, "uid");
             return (Criteria) this;
         }
