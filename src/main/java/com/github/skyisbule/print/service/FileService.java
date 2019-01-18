@@ -53,7 +53,9 @@ public class FileService {
         return file;
     }
 
-    public String doDelete(int fid) throws GlobalException {
+    public String doDelete(Integer fid) throws GlobalException {
+        if (fid == null)
+            throw new GlobalException(ErrorConstant.PARAM_ERROR);
         User user;
         try {
             user = userService.getUser(request);

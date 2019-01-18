@@ -4,6 +4,7 @@ import com.github.skyisbule.print.common.BaseHttpResponse;
 import com.github.skyisbule.print.domain.DbFile;
 import com.github.skyisbule.print.exception.GlobalException;
 import com.github.skyisbule.print.service.FileService;
+import com.github.skyisbule.print.vo.FileWithUserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,7 +35,7 @@ public class FileController {
 
     @ApiOperation("删除一条文件记录")
     @RequestMapping("/delete")
-    public BaseHttpResponse<String> delete(@ApiParam("主键id")int fid) throws GlobalException {
+    public BaseHttpResponse<String> delete(@ApiParam("主键id")Integer fid) throws GlobalException {
         try{
             return new BaseHttpResponse<>(fileService.doDelete(fid));
         }catch (Exception e){
@@ -44,15 +45,15 @@ public class FileController {
 
     @ApiOperation("根据条件获取文件对象，传什么什么就是查询条件，会触发鉴权。")
     @RequestMapping("/get")
-    public BaseHttpResponse<DbFile> getByParam(@ApiParam("页码数从0开始")    Integer  page,
-                                               @ApiParam("每页返回多少数据")  Integer  paseSize,
-                                               @ApiParam("文件名，模糊搜索")  String   fileName,
-                                               @ApiParam("用户id")          Integer  uid,
-                                               @ApiParam("开始时间，如：2018-1-1 00:00:00") String uploadTimeStart,
-                                               @ApiParam("结束时间，如：2018-1-1 00:00:00") String uploadTimeEnd,
-                                               @ApiParam("是否公开：0否1是") Integer isPublic) throws GlobalException {
+    public BaseHttpResponse<List<FileWithUserVo>> getByParam(@ApiParam("页码数从0开始")    Integer  page,
+                                                             @ApiParam("每页返回多少数据")  Integer  pageSize,
+                                                             @ApiParam("文件名，模糊搜索")  String   fileName,
+                                                             @ApiParam("用户id")          Integer  uid,
+                                                             @ApiParam("开始时间，如：2018-1-1 00:00:00") String uploadTimeStart,
+                                                             @ApiParam("结束时间，如：2018-1-1 00:00:00") String uploadTimeEnd,
+                                                             @ApiParam("是否公开：0否1是") Integer isPublic) throws GlobalException {
         try{
-            return null;
+            return new BaseHttpResponse<>(fileService.get(page,pageSize,fileName,uid,uploadTimeStart,uploadTimeEnd,isPublic));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }

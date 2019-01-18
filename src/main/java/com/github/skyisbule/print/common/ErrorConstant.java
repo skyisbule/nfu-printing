@@ -4,6 +4,8 @@ public class ErrorConstant {
 
     /**权限不足**/
     public static final String NO_PERMISSION           = "00001";
+    /**用户传参错误**/
+    public static final String PARAM_ERROR             = "00002";
 
     /**用户名已存在**/
     public static final String ACCOUNT_ALREADY_EXISTS  = "10001";
