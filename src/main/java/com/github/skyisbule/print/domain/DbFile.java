@@ -1,6 +1,7 @@
 package com.github.skyisbule.print.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,17 +11,18 @@ import java.util.Date;
  * @author 
  */
 public class DbFile implements Serializable {
+    @ApiModelProperty("文件id")
     private Integer fid;
-
+    @ApiModelProperty("用户id")
     private Integer uid;
-
+    @ApiModelProperty("文件名")
     private String fileName;
-
+    @ApiModelProperty("文件的url")
     private String fileUrl;
-
+    @ApiModelProperty("上传日期，精确到天")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     private Date uploadTime;
-
+    @ApiModelProperty("是否是公开的，也就是是否共享到文件广场给所有人看。")
     private Integer isPublic;
 
     private static final long serialVersionUID = 1L;

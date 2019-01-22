@@ -1,5 +1,7 @@
 package com.github.skyisbule.print.domain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,18 +10,19 @@ import java.util.Date;
  * @author 
  */
 public class Order implements Serializable {
+    @ApiModelProperty("订单id")
     private Integer oid;
-
+    @ApiModelProperty("店铺id")
     private Integer sid;
-
+    @ApiModelProperty("用户id")
     private Integer uid;
-
+    @ApiModelProperty("文件名")
     private String fileName;
-
+    @ApiModelProperty("文件的url")
     private String fileUrl;
-
+    @ApiModelProperty("打印时的备注，如：第一页单面，其余双面。")
     private String requirement;
-
+    @ApiModelProperty("上传日期")
     private Date uploadTime;
 
     private static final long serialVersionUID = 1L;

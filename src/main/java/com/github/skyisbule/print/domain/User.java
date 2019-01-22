@@ -1,5 +1,7 @@
 package com.github.skyisbule.print.domain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -7,22 +9,23 @@ import java.io.Serializable;
  * @author 
  */
 public class User implements Serializable {
+    @ApiModelProperty("用户id")
     private Integer uid;
-
+    @ApiModelProperty("账号名，不可重复。")
     private String nickName;
-
+    @ApiModelProperty("密码")
     private String passwd;
-
+    @ApiModelProperty("微信的openid")
     private String openId;
-
+    @ApiModelProperty("性别")
     private String sex;
-
+    @ApiModelProperty("头像的url")
     private String headPic;
-
+    @ApiModelProperty("微信号")
     private String wechat;
-
+    @ApiModelProperty("手机号")
     private String telNum;
-
+    @ApiModelProperty("有没有开启自己的店铺")
     private Integer openShop;
 
     private static final long serialVersionUID = 1L;

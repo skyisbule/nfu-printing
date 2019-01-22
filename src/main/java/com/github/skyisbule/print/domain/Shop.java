@@ -1,5 +1,7 @@
 package com.github.skyisbule.print.domain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -7,18 +9,19 @@ import java.io.Serializable;
  * @author 
  */
 public class Shop implements Serializable {
+    @ApiModelProperty("店铺id，这个id和用户id是一样的。")
     private Integer sid;
-
+    @ApiModelProperty("店铺名")
     private String name;
-
+    @ApiModelProperty("西区还是东区")
     private String region;
-
+    @ApiModelProperty("哪栋楼")
     private String roomNumber;
-
+    @ApiModelProperty("标签")
     private String tag;
-
+    @ApiModelProperty("详细介绍")
     private String content;
-
+    @ApiModelProperty("目前是否开店")
     private Integer openUp;
 
     private static final long serialVersionUID = 1L;
