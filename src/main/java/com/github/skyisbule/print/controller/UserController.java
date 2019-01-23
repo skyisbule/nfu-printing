@@ -31,9 +31,9 @@ public class UserController {
         }
     }
 
-    @ApiOperation("登录接口,若成功则会返回密匙，请前端自行把它写入cookie,key为session,另外还要再将用户id写入cookie，key为uid")
+    @ApiOperation("登录接口,若成功则会返回密匙，请前端自行把它写入cookie,key为session,另外还要再将用户id写入cookie，key为uid。或者也可以用请求头鉴权，key为：accessToken，value为：uid-token，以-分割。")
     @RequestMapping("/login")
-    public BaseHttpResponse<String> checkNickName(String account,String passwd) throws GlobalException {
+    public BaseHttpResponse<User> checkNickName(String account,String passwd) throws GlobalException {
         try{
             return new BaseHttpResponse<>(userService.doLogin(account,passwd));
         }catch (Exception e){

@@ -52,7 +52,7 @@ public class UserService {
         return user;
     }
 
-    public String doLogin(String account, String passwd) throws GlobalException {
+    public User doLogin(String account, String passwd) throws GlobalException {
         UserExample e = new UserExample();
         e.createCriteria()
                 .andNickNameEqualTo(account)
@@ -60,20 +60,32 @@ public class UserService {
         List<User> users = userDao.selectByExample(e);
         if (users == null || users.size() == 0)
             throw new GlobalException(ErrorConstant.ACCOUNT_OR_PASSWD_ERROR);
-        return Security.encode(users.get(0).getPasswd());
+        User result = users.get(0);
+        result.setPasswd(Security.encode(passwd));
+        result.setOpenId("此接口不返回openid");
+        return result;
     }
 
     public User getUser(HttpServletRequest request) throws GlobalException {
         int uid = 1;
         String passwd = "";
-        if (request.getCookies() == null)
-            throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals("session")) {
-                passwd = Security.decode(cookie.getValue());
-            }
-            if (cookie.getName().equals("uid")) {
-                uid = Integer.parseInt(cookie.getValue());
+        //这里增加一下尝试用请求头获取用户凭证
+        String accessToken = request.getHeader("accessToken");
+        //使用请求头鉴权，否则使用cookie鉴权
+        if (accessToken != null){
+            String[] strs = accessToken.split("-");
+            uid = Integer.parseInt(strs[0]);
+            passwd = Security.decode(strs[1]);
+        }else {
+            if (request.getCookies() == null)
+                throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("session")) {
+                    passwd = Security.decode(cookie.getValue());
+                }
+                if (cookie.getName().equals("uid")) {
+                    uid = Integer.parseInt(cookie.getValue());
+                }
             }
         }
         if (uid == 1 && passwd.equals(""))
