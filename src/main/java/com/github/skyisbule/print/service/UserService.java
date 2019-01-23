@@ -97,6 +97,8 @@ public class UserService {
         List<User> users = userDao.selectByExample(e);
         if (users == null || users.size() == 0)
             throw new GlobalException(ErrorConstant.FAILURE_OF_LOGIN_STATUS);
+        users.get(0).setPasswd("此接口不返回密码");
+        users.get(0).setOpenId("此接口不返回openId");
         return users.get(0);
     }
 
