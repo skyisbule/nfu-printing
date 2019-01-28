@@ -47,28 +47,6 @@ mybatis:
   typeAliasesPackage: org.spring.springboot.domain
   mapperLocations: classpath:mapper/*.xml
 
-swagger:
-  enabled: true
-  title: swagger
-  description: skyisbule.github.com
-  version: 1.0
-  base-package: com.github.skyisbule.print
-  base-path: /**
-  exclude-path: /error,/ops/**
-  apply-default-response-messages: false
-  global-response-message:
-    get[0]:
-      code: 500
-      message: server error
-      modelRef: error
-    get[1]:
-      code: 500
-      message: server error
-      modelRef: error
-    post:
-      code : 500
-      message: server error
-      modelRef: error
 
 qiniu:
   accessKey: dcNxos-8d9hb222GRRyI5dWlsMI0hARssZA_Bspn

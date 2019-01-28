@@ -28,6 +28,8 @@
         <project.build.locales>zh_CN</project.build.locales>
         <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
         <mysql-connector>5.1.39</mysql-connector>
+        <swagger.version>2.6.1</swagger.version>
+        <swagger.doxc.version>1.0.6</swagger.doxc.version>
     </properties>
 
     <dependencies>
@@ -55,9 +57,9 @@
         </dependency>
 
         <dependency>
-            <groupId> org.springframework.boot </groupId>
-            <artifactId> spring-boot-configuration-processor </artifactId>
-            <optional> true </optional>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Spring Boot Mybatis 依赖 -->
@@ -92,11 +94,28 @@
         </dependency>
 
         <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mapstruct</groupId>
+                    <artifactId>mapstruct</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <!--<dependency>
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>1.7.0.RELEASE</version>
         </dependency>
-
+-->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
