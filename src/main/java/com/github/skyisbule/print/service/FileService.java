@@ -62,11 +62,11 @@ public class FileService {
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }
-        //todo 这里最后加上管理员删除的权限 让管理员也可以删除
         DbFile file = fileDao.selectByPrimaryKey(fid);
-        if (!Objects.equals(file.getUid(), user.getUid())){
-            throw new GlobalException(ErrorConstant.DELETE_OTHERS_FILE);
-        }
+        if (!user.isAdmin())
+            if (!Objects.equals(file.getUid(), user.getUid())){
+                throw new GlobalException(ErrorConstant.DELETE_OTHERS_FILE);
+            }
         fileDao.deleteByPrimaryKey(fid);
         return "删除成功";
     }
