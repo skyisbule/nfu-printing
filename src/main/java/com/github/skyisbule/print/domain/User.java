@@ -1,19 +1,17 @@
 package com.github.skyisbule.print.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-/**
- * db_user
- * @author 
- */
 public class User implements Serializable {
     @ApiModelProperty("用户id")
     private Integer uid;
     @ApiModelProperty("账号名，不可重复。")
     private String nickName;
     @ApiModelProperty("密码")
+    @JsonIgnore
     private String passwd;
     @ApiModelProperty("微信的openid")
     private String openId;

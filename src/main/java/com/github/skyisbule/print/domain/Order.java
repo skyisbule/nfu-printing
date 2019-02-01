@@ -5,10 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * db_order
- * @author 
- */
 public class Order implements Serializable {
     @ApiModelProperty("订单id")
     private Integer oid;

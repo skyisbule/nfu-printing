@@ -4,10 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-/**
- * db_shop
- * @author 
- */
 public class Shop implements Serializable {
     @ApiModelProperty("店铺id，这个id和用户id是一样的。")
     private Integer sid;

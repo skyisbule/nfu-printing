@@ -6,10 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * db_file
- * @author 
- */
 public class DbFile implements Serializable {
     @ApiModelProperty("文件id")
     private Integer fid;
