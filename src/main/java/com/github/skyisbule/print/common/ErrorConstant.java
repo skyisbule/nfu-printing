@@ -21,4 +21,6 @@ public class ErrorConstant {
     /**您删除的不是自己的文件**/
     public static final String DELETE_OTHERS_FILE      = "20001";
 
+    /**该标签名已经有啦**/
+        public static final String TAG_HAD_SAVED       = "30001";
 }
