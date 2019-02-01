@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
-@Controller
+//@Controller
 public class WxErrorController implements ErrorController {
 
   private static final Logger logger = LoggerFactory.getLogger(WxErrorController.class);

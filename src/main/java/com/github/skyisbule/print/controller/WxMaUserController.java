@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
-@RestController
+//@RestController
 @RequestMapping("/wechat/user")
 public class WxMaUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

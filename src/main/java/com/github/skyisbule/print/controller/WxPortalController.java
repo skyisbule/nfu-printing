@@ -1,4 +1,4 @@
-package com.github.binarywang.demo.wx.miniapp.controller;
+package com.github.skyisbule.print.controller;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaMessage;
@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
-@RestController
+//@RestController
 @RequestMapping("/wechat/portal")
 public class WxPortalController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TagService {
@@ -62,6 +63,37 @@ public class TagService {
         e.setOffset((long)page*pageSize);
         e.setLimit(pageSize);
         return tagDao.selectByExample(e);
+    }
+
+    public String doUpdate(int tid,String newName) throws GlobalException {
+        User user;
+        try {
+            user = userService.getUser(request);
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+        Tag old = tagDao.selectByPrimaryKey(tid);
+        if (!user.isAdmin())
+            if (!Objects.equals(old.getUid(), user.getUid()))
+                throw new GlobalException(ErrorConstant.NO_PERMISSION);
+        old.setTagName(newName);
+        tagDao.updateByPrimaryKey(old);
+        return "修改成功。";
+    }
+
+    public String doDelete(int tid)throws GlobalException {
+        User user;
+        try {
+            user = userService.getUser(request);
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+        Tag old = tagDao.selectByPrimaryKey(tid);
+        if (!user.isAdmin())
+            if (!Objects.equals(old.getUid(), user.getUid()))
+                throw new GlobalException(ErrorConstant.NO_PERMISSION);
+        tagDao.deleteByPrimaryKey(tid);
+        return "删除成功。";
     }
 
 }

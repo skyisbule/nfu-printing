@@ -1,23 +1,22 @@
 package com.github.skyisbule.print.domain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * db_tag
- * @author 
- */
 public class Tag implements Serializable {
+    @ApiModelProperty("主键id")
     private Integer tid;
-
+    @ApiModelProperty("标签的名字")
     private String tagName;
-
+    @ApiModelProperty("用户名，不用传")
     private String userName;
-
+    @ApiModelProperty("用户id，也不用传")
     private Integer uid;
-
+    @ApiModelProperty("这个tag被用了多少次")
     private Integer usedCount;
-
+    @ApiModelProperty("创建时间，不用传")
     private Date createDate;
 
     private static final long serialVersionUID = 1L;

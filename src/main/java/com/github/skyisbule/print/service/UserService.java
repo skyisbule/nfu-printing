@@ -107,6 +107,7 @@ public class UserService {
         if (user == null)
             throw new GlobalException(ErrorConstant.UID_NOT_EXISTS);
         user.setPasswd(null);
+        user.setOpenId(null);
         return user;
     }
 
