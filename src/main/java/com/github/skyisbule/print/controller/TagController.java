@@ -9,10 +9,12 @@ import io.swagger.annotations.ApiOperation;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Api(description = "标签相关的接口")
@@ -57,9 +59,19 @@ public class TagController {
 
     @ApiOperation("删除一个tag，只能删除自己的创建的，除非你是管理员。")
     @RequestMapping("/delete")
-    public BaseHttpResponse<String> delete(int tid,String name) throws GlobalException {
+    public BaseHttpResponse<String> delete(int tid) throws GlobalException {
         try{
-            return new BaseHttpResponse<>(tagService.doUpdate(tid,name));
+            return new BaseHttpResponse<>(tagService.doDelete(tid));
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
+    @ApiOperation("批量为标签的使用次数+1,请用post请求，如[1,2,3]")
+    @RequestMapping(value = "/tag-count-ins",method = RequestMethod.POST)
+    public BaseHttpResponse<String> tagCountIns(@RequestBody ArrayList<Integer> ids) throws GlobalException {
+        try{
+            return new BaseHttpResponse<>(tagService.tagCountIns(ids));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }

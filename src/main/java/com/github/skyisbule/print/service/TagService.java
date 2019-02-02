@@ -8,8 +8,10 @@ import com.github.skyisbule.print.domain.User;
 import com.github.skyisbule.print.exception.GlobalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -46,8 +48,8 @@ public class TagService {
         tag.setTid(null);
         tag.setCreateDate(new Date());
         tag.setUsedCount(0);
-        tag.setUsedCount(user.getUid());
-        tag.setTagName(user.getNickName());
+        tag.setUid(user.getUid());
+        tag.setUserName(user.getNickName());
         tagDao.insert(tag);
         return "新建标签成功。";
     }
@@ -94,6 +96,18 @@ public class TagService {
                 throw new GlobalException(ErrorConstant.NO_PERMISSION);
         tagDao.deleteByPrimaryKey(tid);
         return "删除成功。";
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public String tagCountIns(ArrayList<Integer> ids) throws GlobalException {
+        User user;
+        try {
+            user = userService.getUser(request);
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+        ids.forEach(id->{tagDao.countIns1(id);System.out.println(id);});
+        return "success";
     }
 
 }
