@@ -1,5 +1,5 @@
 ﻿# Host: 127.0.0.1  (Version 5.7.24)
-# Date: 2019-01-25 19:15:59
+# Date: 2019-02-02 15:02:29
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -89,13 +89,19 @@ INSERT INTO `db_shop` VALUES (1,'sss','asdf','212','sdf','sdfaasdf',0),(2,'dsfds
 DROP TABLE IF EXISTS `db_tag`;
 CREATE TABLE `db_tag` (
   `tid` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_name` varchar(255) NOT NULL DEFAULT '',
+  `user_name` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `used_count` int(11) DEFAULT NULL,
+  `create_date` date DEFAULT NULL,
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 #
 # Data for table "db_tag"
 #
 
+INSERT INTO `db_tag` VALUES (1,'123','123',5,5,NULL);
 
 #
 # Structure for table "db_time"
@@ -134,4 +140,4 @@ CREATE TABLE `db_user` (
 # Data for table "db_user"
 #
 
-INSERT INTO `db_user` VALUES (1,'sky','123',NULL,NULL,NULL,NULL,NULL,0),(2,'skkkr','123456',NULL,NULL,NULL,NULL,NULL,0),(3,'skkkrs','123456',NULL,NULL,NULL,NULL,NULL,0),(4,'skkkrsdsfs','123456dsfadf',NULL,NULL,NULL,NULL,NULL,0),(5,'123','123',NULL,NULL,NULL,NULL,NULL,0),(6,'233','233',NULL,NULL,NULL,NULL,NULL,0),(7,'12412','214151',NULL,NULL,NULL,NULL,NULL,0),(8,'1234','123',NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO `db_user` VALUES (1,'sky','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(2,'skkkr','123456','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(3,'skkkrs','123456','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(4,'skkkrsdsfs','123456dsfadf','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(5,'123','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(6,'233','233','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(7,'12412','214151','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(8,'1234','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0);

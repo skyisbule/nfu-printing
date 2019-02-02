@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @MapperScan("com.github.skyisbule.print.*")
 @SpringBootApplication
-public class WarehouseApplication extends SpringBootServletInitializer {
+public class PrintingApplication extends SpringBootServletInitializer {
   public static void main(String[] args) {
 
     Props props = new Props("errorMessage.properties");
@@ -20,12 +20,12 @@ public class WarehouseApplication extends SpringBootServletInitializer {
         ExceptionMessage.message.put(key.toString(),value.toString());
     });
 
-    SpringApplication.run(WarehouseApplication.class, args);
+    SpringApplication.run(PrintingApplication.class, args);
   }
 
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-    return application.sources(WarehouseApplication.class);
+    return application.sources(PrintingApplication.class);
   }
 
 }
