@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class UserService {
     UserDao userDao;
 
     @Transactional(rollbackFor = Exception.class)
-    public User doRegister(User user) throws GlobalException {
+    public synchronized User doRegister(User user,HttpServletResponse response) throws GlobalException {
         user.setUid(null);
         user.setOpenShop(0);
         UserExample e = new UserExample();
@@ -36,7 +37,17 @@ public class UserService {
         user.setUid(uid);
         if (user.getPasswd() != null)
             user.setPasswd(Security.encode(user.getPasswd()));
+        writeLoginCookie(uid,user.getPasswd(),response);
         return user;
+    }
+
+    private void writeLoginCookie(Integer uid,String passwd,HttpServletResponse response){
+        Cookie idCookie = new Cookie("uid",uid.toString());
+        idCookie.setPath("/");
+        Cookie session  = new Cookie("session",passwd);
+        session.setPath("/");
+        response.addCookie(idCookie);
+        response.addCookie(session);
     }
 
     public User getUserByOpenId(String openId) throws GlobalException {
@@ -52,7 +63,7 @@ public class UserService {
         return user;
     }
 
-    public User doLogin(String account, String passwd) throws GlobalException {
+    public User doLogin(String account, String passwd,HttpServletResponse response) throws GlobalException {
         UserExample e = new UserExample();
         e.createCriteria()
                 .andNickNameEqualTo(account)
@@ -61,8 +72,9 @@ public class UserService {
         if (users == null || users.size() == 0)
             throw new GlobalException(ErrorConstant.ACCOUNT_OR_PASSWD_ERROR);
         User result = users.get(0);
-        result.setPasswd(Security.encode(passwd));
-        result.setOpenId("此接口不返回openid");
+        //result.setPasswd(Security.encode(passwd));
+        result.setOpenId(Security.encode(passwd));
+        writeLoginCookie(result.getUid(),result.getOpenId(),response);
         return result;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/api/user",method = {RequestMethod.GET,RequestMethod.POST})
@@ -23,9 +24,9 @@ public class UserController {
 
     @ApiOperation("用户注册接口,会返回uid，且若是用户名密码注册，则passwd字段会返回加密后的value，请前端直接将其写入cookie，uid同理，和登录接口一样。")
     @RequestMapping("/register")
-    public BaseHttpResponse<User> doRegister(User user) throws GlobalException {
+    public BaseHttpResponse<User> doRegister(User user,HttpServletResponse response) throws GlobalException {
         try{
-            return new BaseHttpResponse<>(userService.doRegister(user));
+            return new BaseHttpResponse<>(userService.doRegister(user,response));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }
@@ -33,9 +34,9 @@ public class UserController {
 
     @ApiOperation("登录接口,若成功则会返回密匙，请前端自行把它写入cookie,key为session,另外还要再将用户id写入cookie，key为uid。或者也可以用请求头鉴权，key为：accessToken，value为：uid-token，以-分割。")
     @RequestMapping("/login")
-    public BaseHttpResponse<User> checkNickName(String account,String passwd) throws GlobalException {
+    public BaseHttpResponse<User> checkNickName(String account,String passwd,HttpServletResponse response) throws GlobalException {
         try{
-            return new BaseHttpResponse<>(userService.doLogin(account,passwd));
+            return new BaseHttpResponse<>(userService.doLogin(account,passwd,response));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }
