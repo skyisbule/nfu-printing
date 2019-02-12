@@ -1,5 +1,6 @@
-package com.github.skyisbule.print.interceptor;
+package com.github.skyisbule.print.config;
 
+import com.github.skyisbule.print.interceptor.Interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;

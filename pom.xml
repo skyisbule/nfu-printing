@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.github.skyisbule</groupId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0</version>
     <artifactId>printing</artifactId>
     <packaging>jar</packaging>
 
@@ -39,21 +39,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-pay</artifactId>
-            <version>${weixin-java-pay.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <!-- 如果需要打包成war包，并放在tomcat里运行，请放开如下注释 -->
             <!-- <scope>provided</scope> -->
-        </dependency>
-        <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-miniapp</artifactId>
-            <version>${weixin-java-miniapp.version}</version>
         </dependency>
 
         <dependency>
@@ -110,12 +99,6 @@
             <version>${swagger.version}</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.spring4all</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
-            <version>1.7.0.RELEASE</version>
-        </dependency>
--->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
