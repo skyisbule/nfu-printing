@@ -40,6 +40,11 @@ public class ShopService {
         return shopDao.selectByExample(e);
     }
 
+    public Shop getById(Integer id){
+        if (id == null) id = 1;
+        return shopDao.selectByPrimaryKey(id);
+    }
+
     public String open(int status) throws GlobalException {
         User user = null;
         try {

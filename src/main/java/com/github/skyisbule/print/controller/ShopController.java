@@ -32,6 +32,16 @@ public class ShopController {
         }
     }
 
+    @ApiOperation("根据店铺id获取店铺所有信息")
+    @RequestMapping("/get-by-id")
+    public BaseHttpResponse<Shop> getById(Integer sid) throws GlobalException {
+        try{
+            return new BaseHttpResponse<>(shopService.getById(sid));
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
     @ApiOperation("创建自己的店铺")
     @RequestMapping("/create")
     public BaseHttpResponse<String> doCreate(@ApiParam("不用传sid和openUp") Shop shop) throws GlobalException {
