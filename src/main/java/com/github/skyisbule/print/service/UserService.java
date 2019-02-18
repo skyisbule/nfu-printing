@@ -14,12 +14,15 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    HttpServletRequest request;
 
     @Transactional(rollbackFor = Exception.class)
     public synchronized User doRegister(User user,HttpServletResponse response) throws GlobalException {
@@ -121,6 +124,29 @@ public class UserService {
         user.setPasswd(null);
         user.setOpenId(null);
         return user;
+    }
+
+    public String doUpdate(User updateUser) throws GlobalException {
+        User requestUser;
+        try {
+            requestUser = this.getUser(request);
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+        if (updateUser.getUid() == null){
+            updateUser.setUid(requestUser.getUid());
+        }
+        if (requestUser.isAdmin()){
+            userDao.updateByPrimaryKey(updateUser);
+            return "更新成功";
+        }
+        if (!Objects.equals(requestUser.getUid(), updateUser.getUid())){
+            throw new GlobalException(ErrorConstant.NO_PERMISSION);
+        }
+        updateUser.setNickName(requestUser.getNickName());
+        updateUser.setOpenShop(requestUser.getOpenShop());
+        userDao.updateByPrimaryKey(updateUser);
+        return "更新成功";
     }
 
 }

@@ -72,4 +72,14 @@ public class UserController {
         }
     }
 
+    @ApiOperation("更新用户信息，管理员用户可以更新所有人的信息，而其他用户只能更新自己的。")
+    @RequestMapping("/update-by-uid")
+    public BaseHttpResponse<String> doUpdate(User user) throws GlobalException {
+        try {
+            return new BaseHttpResponse<>(userService.doUpdate(user));
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
 }
