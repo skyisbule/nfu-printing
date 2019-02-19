@@ -30,8 +30,13 @@ public class ShopService {
         }
         shop.setSid(user.getUid());
         shop.setOpenUp(1);
-        shopDao.insert(shop);
-        return "店铺创建成功";
+        try {
+            shopDao.doInsert(shop);
+            return "店铺创建成功";
+        }catch (Exception e){
+            return "您已经创建过店铺了";
+        }
+
     }
 
     public List<Shop> index(){

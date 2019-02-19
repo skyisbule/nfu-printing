@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,7 +45,7 @@ public class ShopController {
 
     @ApiOperation("创建自己的店铺")
     @RequestMapping("/create")
-    public BaseHttpResponse<String> doCreate(@ApiParam("不用传sid和openUp") Shop shop) throws GlobalException {
+    public BaseHttpResponse<String> doCreate(@RequestBody @ApiParam("不用传sid和openUp") Shop shop) throws GlobalException {
         try{
             return new BaseHttpResponse<>(shopService.doCreate(shop));
         }catch (Exception e){
