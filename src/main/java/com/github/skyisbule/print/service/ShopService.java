@@ -1,6 +1,7 @@
 package com.github.skyisbule.print.service;
 
 import com.github.skyisbule.print.dao.ShopDao;
+import com.github.skyisbule.print.dao.UserDao;
 import com.github.skyisbule.print.domain.Shop;
 import com.github.skyisbule.print.domain.ShopExample;
 import com.github.skyisbule.print.domain.User;
@@ -19,6 +20,8 @@ public class ShopService {
     @Autowired
     UserService userService;
     @Autowired
+    UserDao userDao;
+    @Autowired
     HttpServletRequest request;
 
     public String doCreate(Shop shop) throws GlobalException {
@@ -31,7 +34,10 @@ public class ShopService {
         shop.setSid(user.getUid());
         shop.setOpenUp(1);
         try {
+            user = userDao.selectByPrimaryKey(user.getUid());
             shopDao.doInsert(shop);
+            user.setOpenShop(1);
+            userDao.updateByPrimaryKey(user);
             return "店铺创建成功";
         }catch (Exception e){
             return "您已经创建过店铺了";
