@@ -9,6 +9,8 @@
     <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
     <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    oid, sid, `uid`, file_name, file_url, requirement, upload_time
+    oid, sid, `uid`, file_name, file_url, requirement, upload_time, tag, `status`
   </sql>
   <select id="selectByExample" parameterType="com.github.skyisbule.print.domain.OrderExample" resultMap="BaseResultMap">
     select
@@ -111,11 +113,11 @@
   </delete>
   <insert id="insert" keyColumn="oid" keyProperty="oid" parameterType="com.github.skyisbule.print.domain.Order" useGeneratedKeys="true">
     insert into db_order (sid, `uid`, file_name, 
-      file_url, requirement, upload_time
-      )
+      file_url, requirement, upload_time, 
+      tag, `status`)
     values (#{sid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileUrl,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}
-      )
+      #{fileUrl,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{tag,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="oid" keyProperty="oid" parameterType="com.github.skyisbule.print.domain.Order" useGeneratedKeys="true">
     insert into db_order
@@ -138,6 +140,12 @@
       <if test="uploadTime != null">
         upload_time,
       </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sid != null">
@@ -157,6 +165,12 @@
       </if>
       <if test="uploadTime != null">
         #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -190,6 +204,12 @@
       <if test="record.uploadTime != null">
         upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -203,7 +223,9 @@
       file_name = #{record.fileName,jdbcType=VARCHAR},
       file_url = #{record.fileUrl,jdbcType=VARCHAR},
       requirement = #{record.requirement,jdbcType=VARCHAR},
-      upload_time = #{record.uploadTime,jdbcType=TIMESTAMP}
+      upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -229,6 +251,12 @@
       <if test="uploadTime != null">
         upload_time = #{uploadTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where oid = #{oid,jdbcType=INTEGER}
   </update>
@@ -239,7 +267,9 @@
       file_name = #{fileName,jdbcType=VARCHAR},
       file_url = #{fileUrl,jdbcType=VARCHAR},
       requirement = #{requirement,jdbcType=VARCHAR},
-      upload_time = #{uploadTime,jdbcType=TIMESTAMP}
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      tag = #{tag,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER}
     where oid = #{oid,jdbcType=INTEGER}
   </update>
 </mapper>

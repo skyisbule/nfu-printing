@@ -574,6 +574,136 @@ public class OrderExample {
             addCriterion("upload_time not between", value1, value2, "uploadTime");
             return (Criteria) this;
         }
+
+        public Criteria andTagIsNull() {
+            addCriterion("tag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagIsNotNull() {
+            addCriterion("tag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagEqualTo(String value) {
+            addCriterion("tag =", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNotEqualTo(String value) {
+            addCriterion("tag <>", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagGreaterThan(String value) {
+            addCriterion("tag >", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagGreaterThanOrEqualTo(String value) {
+            addCriterion("tag >=", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagLessThan(String value) {
+            addCriterion("tag <", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagLessThanOrEqualTo(String value) {
+            addCriterion("tag <=", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagLike(String value) {
+            addCriterion("tag like", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNotLike(String value) {
+            addCriterion("tag not like", value, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagIn(List<String> values) {
+            addCriterion("tag in", values, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNotIn(List<String> values) {
+            addCriterion("tag not in", values, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagBetween(String value1, String value2) {
+            addCriterion("tag between", value1, value2, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNotBetween(String value1, String value2) {
+            addCriterion("tag not between", value1, value2, "tag");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("`status` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("`status` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("`status` =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("`status` <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("`status` >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`status` >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("`status` <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("`status` <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("`status` in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("`status` not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("`status` between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("`status` not between", value1, value2, "status");
+            return (Criteria) this;
+        }
     }
 
     /**
