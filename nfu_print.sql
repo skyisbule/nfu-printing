@@ -1,5 +1,5 @@
 ﻿# Host: 127.0.0.1  (Version 5.7.24)
-# Date: 2019-02-02 15:02:29
+# Date: 2019-02-20 15:08:57
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -52,6 +52,8 @@ CREATE TABLE `db_order` (
   `file_url` varchar(255) DEFAULT NULL,
   `requirement` varchar(255) DEFAULT NULL,
   `upload_time` datetime DEFAULT NULL,
+  `tag` varchar(255) DEFAULT NULL COMMENT '标签',
+  `status` int(11) unsigned zerofill NOT NULL DEFAULT '00000000000',
   PRIMARY KEY (`oid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -74,13 +76,13 @@ CREATE TABLE `db_shop` (
   `content` varchar(1255) DEFAULT NULL,
   `open_up` int(1) unsigned zerofill NOT NULL DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 #
 # Data for table "db_shop"
 #
 
-INSERT INTO `db_shop` VALUES (1,'sss','asdf','212','sdf','sdfaasdf',0),(2,'dsfdsgfdh','fgh','23','dsf','f',0);
+INSERT INTO `db_shop` VALUES (1,'我的打印铺','东29','212','便宜 实惠 可彩印 接毕业装订','这里是介绍但我实在不知道该写点啥于是就有了这段话 嗯',1),(2,'迷之打印','西11','223','便宜 可配送','这里是介绍但我实在不知道该写点啥于是就有了这段话 嗯',0),(3,NULL,NULL,NULL,NULL,NULL,1),(4,NULL,NULL,NULL,NULL,NULL,1),(5,NULL,NULL,NULL,NULL,NULL,1),(6,NULL,NULL,NULL,NULL,NULL,1),(7,NULL,NULL,NULL,NULL,NULL,1),(8,NULL,NULL,NULL,NULL,NULL,1),(9,NULL,NULL,NULL,NULL,NULL,1),(10,NULL,NULL,NULL,NULL,NULL,1);
 
 #
 # Structure for table "db_tag"
@@ -101,7 +103,7 @@ CREATE TABLE `db_tag` (
 # Data for table "db_tag"
 #
 
-INSERT INTO `db_tag` VALUES (1,'123','123',5,5,NULL);
+INSERT INTO `db_tag` VALUES (1,'123','123',5,1,'2019-02-14');
 
 #
 # Structure for table "db_time"
@@ -140,4 +142,4 @@ CREATE TABLE `db_user` (
 # Data for table "db_user"
 #
 
-INSERT INTO `db_user` VALUES (1,'sky','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(2,'skkkr','123456','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(3,'skkkrs','123456','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(4,'skkkrsdsfs','123456dsfadf','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(5,'123','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(6,'233','233','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(7,'12412','214151','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(8,'1234','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0);
+INSERT INTO `db_user` VALUES (1,'admin','admin','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(2,'skkkr','123456','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(3,'skkkrs','123456','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(4,'ThreadLocal','123456dsfadf','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(5,'123','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(6,'233','233','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(7,'12412','214151','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0),(8,'1234','123','123345','男','https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg','wechatnum','15393740054',0);
