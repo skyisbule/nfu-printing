@@ -33,6 +33,7 @@ public class OrderService {
         }
         order.setUid(user.getUid());
         order.setOid(null);
+        order.setStatus(0);
         orderDao.insert(order);
         return "创建订单成功";
     }
