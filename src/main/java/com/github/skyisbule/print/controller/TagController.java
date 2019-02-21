@@ -19,7 +19,7 @@ import java.util.List;
 
 @Api(description = "标签相关的接口")
 @RestController
-@RequestMapping(value = "/api/tag",method = RequestMethod.GET)
+@RequestMapping(value = "/api/tag",method = {RequestMethod.GET,RequestMethod.POST})
 public class TagController {
 
     @Autowired
