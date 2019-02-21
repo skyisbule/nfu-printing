@@ -150,4 +150,28 @@ public class FileService {
 
     }
 
+    public String doUpdate(Integer fid,String fileName,Integer isPublic) throws GlobalException {
+        User user;
+        try {
+            user = userService.getUser(request);
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+        if (fid == null) return "文件id不能为空";
+        DbFile file = fileDao.selectByPrimaryKey(fid);
+        if (!Objects.equals(fid, user.getUid())){
+            if (!user.isAdmin())//非管理员只能修改自己的文件记录
+                throw new GlobalException(ErrorConstant.NO_PERMISSION);
+        }
+        if (file == null) return "文件id不存在";
+        if (fileName!=null){
+            if (fileName.trim().length()!=0)
+                file.setFileName(fileName);
+        }
+        if (isPublic != null)
+            file.setIsPublic(isPublic);
+        fileDao.updateByPrimaryKey(file);
+        return "修改成功";
+    }
+
 }

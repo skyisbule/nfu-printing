@@ -59,4 +59,16 @@ public class FileController {
         }
     }
 
+    @ApiOperation("修改文件记录，非管理员用户只能修改自己的。")
+    @RequestMapping("/delete")
+    public BaseHttpResponse<String> doUpdate(@ApiParam("主键id")Integer fid,
+                                             @ApiParam("文件名")String fileName,
+                                             @ApiParam("是否公开")Integer isPublic) throws GlobalException {
+        try{
+            return new BaseHttpResponse<>(fileService.doUpdate(fid,fileName,isPublic));
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
 }
