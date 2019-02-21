@@ -60,7 +60,7 @@ public class FileController {
     }
 
     @ApiOperation("修改文件记录，非管理员用户只能修改自己的。")
-    @RequestMapping("/delete")
+    @RequestMapping("/update")
     public BaseHttpResponse<String> doUpdate(@ApiParam("主键id")Integer fid,
                                              @ApiParam("文件名")String fileName,
                                              @ApiParam("是否公开")Integer isPublic) throws GlobalException {
