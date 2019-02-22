@@ -1,5 +1,6 @@
 package com.github.skyisbule.print.service;
 
+import com.github.skyisbule.print.common.ErrorConstant;
 import com.github.skyisbule.print.dao.ShopDao;
 import com.github.skyisbule.print.dao.UserDao;
 import com.github.skyisbule.print.domain.Shop;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ShopService {
@@ -72,5 +74,21 @@ public class ShopService {
         return "店铺状态修改成功";
     }
 
+    public String doUpdate(Shop shop) throws GlobalException {
+        User user;
+        try {
+            user = userService.getUser(request);
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+        if (shop.getSid() == null)
+            throw new GlobalException(ErrorConstant.SHOP_ID_IS_NULL);
+        if (!Objects.equals(user.getUid(), shop.getSid())){
+            if (!user.isAdmin())
+                throw new GlobalException(ErrorConstant.NO_PERMISSION);
+        }
+        shopDao.updateByPrimaryKeySelective(shop);
+        return "修改店铺信息成功";
+    }
 
 }

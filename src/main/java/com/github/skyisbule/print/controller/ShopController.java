@@ -73,4 +73,14 @@ public class ShopController {
         }
     }
 
+    @ApiOperation("修改店铺信息,所有的属性均可修改，但有鉴权，非管理员只能修改自己的。")
+    @RequestMapping("/update")
+    public BaseHttpResponse<String> doUpdate(Shop shop) throws GlobalException {
+        try{
+            return new BaseHttpResponse<>(shopService.doUpdate(shop));
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
 }

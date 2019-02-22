@@ -22,5 +22,8 @@ public class ErrorConstant {
     public static final String DELETE_OTHERS_FILE      = "20001";
 
     /**该标签名已经有啦**/
-        public static final String TAG_HAD_SAVED       = "30001";
+    public static final String TAG_HAD_SAVED           = "30001";
+
+    /**店铺id为空**/
+    public static final String SHOP_ID_IS_NULL         = "40001";
 }
