@@ -87,6 +87,10 @@ public class ShopService {
             if (!user.isAdmin())
                 throw new GlobalException(ErrorConstant.NO_PERMISSION);
         }
+        if (shop.getOpenUp() != null ){
+            if (shop.getOpenUp() != 0 && shop.getOpenUp() !=1)
+                shop.setOpenUp(null);
+        }
         shopDao.updateByPrimaryKeySelective(shop);
         return "修改店铺信息成功";
     }
