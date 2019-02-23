@@ -137,7 +137,7 @@ public class UserService {
             updateUser.setUid(requestUser.getUid());
         }
         if (requestUser.isAdmin()){
-            userDao.updateByPrimaryKey(updateUser);
+            userDao.updateByPrimaryKeySelective(updateUser);
             return "更新成功";
         }
         if (!Objects.equals(requestUser.getUid(), updateUser.getUid())){
@@ -145,7 +145,7 @@ public class UserService {
         }
         updateUser.setNickName(requestUser.getNickName());
         updateUser.setOpenShop(requestUser.getOpenShop());
-        userDao.updateByPrimaryKey(updateUser);
+        userDao.updateByPrimaryKeySelective(updateUser);
         return "更新成功";
     }
 
