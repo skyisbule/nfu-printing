@@ -2,15 +2,17 @@ package com.github.skyisbule.print.service;
 
 import com.github.skyisbule.print.common.ErrorConstant;
 import com.github.skyisbule.print.dao.OrderDao;
-import com.github.skyisbule.print.domain.Order;
-import com.github.skyisbule.print.domain.OrderExample;
-import com.github.skyisbule.print.domain.User;
+import com.github.skyisbule.print.dao.ShopDao;
+import com.github.skyisbule.print.domain.*;
 import com.github.skyisbule.print.exception.GlobalException;
+import com.github.skyisbule.print.vo.OrderWithShopVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -23,7 +25,7 @@ public class OrderService {
     @Autowired
     HttpServletRequest request;
     @Autowired
-    UserService userService;
+    ShopDao shopDao;
 
     private void checkOrderInfo(Order order) throws GlobalException {
         if (order.getSid() == null)
@@ -53,7 +55,7 @@ public class OrderService {
         return "创建订单成功";
     }
 
-    public List<Order> get(Integer page,Integer pageSize,Integer type) throws GlobalException {
+    public ArrayList<OrderWithShopVO> get(Integer page,Integer pageSize,Integer type) throws GlobalException {
         User user;
         try {
             user = userService.getUser(request);
@@ -79,7 +81,28 @@ public class OrderService {
         }else{
             throw new GlobalException(ErrorConstant.NO_PERMISSION);
         }
-        return orderDao.selectByExample(e);
+        List<Order> orders = orderDao.selectByExample(e);
+        ArrayList<Integer> sIds = new ArrayList<>();
+        for (Order order : orders) {
+            if (order.getSid()!=null){
+                sIds.add(order.getSid());
+            }
+        }
+        ShopExample se = new ShopExample();
+        se.createCriteria()
+                .andSidIn(sIds);
+        List<Shop> shops = shopDao.selectByExample(se);
+        HashMap<Integer,Shop> shopHashMap = new HashMap<>();
+        for (Shop shop : shops) {
+            shopHashMap.put(shop.getSid(),shop);
+        }
+        ArrayList<OrderWithShopVO> vos = new ArrayList<>();
+        for (Order order : orders) {
+            if (order.getSid() != null){
+                vos.add(OrderWithShopVO.build(order, shopHashMap.get(order.getSid())));
+            }
+        }
+        return vos;
     }
 
 }

@@ -39,7 +39,7 @@ public class UserService {
         int uid = userDao.getMaxForUser();
         user.setUid(uid);
         if (user.getPasswd() != null)
-            user.setPasswd(Security.encode(user.getPasswd()));
+            user.setOpenId(Security.encode(user.getPasswd()));
         writeLoginCookie(uid,user.getPasswd(),response);
         return user;
     }
