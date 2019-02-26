@@ -22,6 +22,20 @@ public class OrderService {
     UserService userService;
     @Autowired
     HttpServletRequest request;
+    @Autowired
+    UserService userService;
+
+    private void checkOrderInfo(Order order) throws GlobalException {
+        if (order.getSid() == null)
+            throw new GlobalException("sid can't be null.");
+        User shopOwner = userService.getByUid(order.getSid());
+        if (shopOwner == null)
+            throw new GlobalException("there is no this shop,please check sid.");
+        if (order.getFileName() == null || order.getFileUrl() == null)
+            throw new GlobalException("file name or url can't be null.");
+        if (order.getRequirement() == null)
+            throw new GlobalException("requirement can't be null.");
+    }
 
     public String doCreate(Order order) throws GlobalException {
         order.setUploadTime(new Date());
@@ -31,6 +45,7 @@ public class OrderService {
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }
+        checkOrderInfo(order);
         order.setUid(user.getUid());
         order.setOid(null);
         order.setStatus(0);
