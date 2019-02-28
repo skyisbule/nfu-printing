@@ -319,7 +319,8 @@ public class DbFileExample {
         }
 
         public Criteria andFileNameLike(String value) {
-            addCriterion("file_name like", value, "fileName");
+            if (value != null)
+                addCriterion("file_name like", value, "fileName");
             return (Criteria) this;
         }
 

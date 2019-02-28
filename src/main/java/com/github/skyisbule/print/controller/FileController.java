@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/file",method = {RequestMethod.GET,RequestMethod.POST})
+@RequestMapping(value = "/api/file",method = {RequestMethod.POST})
 @Api(description = "用户上传文件相关的接口")
 public class FileController {
 

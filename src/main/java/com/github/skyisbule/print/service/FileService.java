@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class FileService {
@@ -115,14 +112,15 @@ public class FileService {
         }
 
         if (page == null) page=0;
-        if (pageSize == 10)pageSize=10;
+        if (pageSize == null)pageSize=10;
+        if (fileName != null) fileName = "%" + fileName + "%";
 
         DbFileExample e = new DbFileExample();
         e.setOffset((long)page*pageSize);
         e.setLimit(pageSize);
         e.createCriteria()
                 .andUidEqualTo(uid)
-                .andFileNameLike("%"+fileName+"%")
+                .andFileNameLike(fileName)
                 .andIsPublicEqualTo(isPublic)
                 .andUploadTimeBetween(begin,end);
 
@@ -137,15 +135,19 @@ public class FileService {
         UserExample ue = new UserExample();
         ue.createCriteria()
                 .andUidIn(uids);
-        List<User> users = userDao.selectByExample(ue);
-
-        for (int i = 0; i<dbFileList.size();i++) {
+        HashMap<Integer,User> userMap = new HashMap<>();
+        if (uids.size()>0) {
+            List<User> users = userDao.selectByExample(ue);
+            for (User user1 : users) {
+                userMap.put(user1.getUid(), user1);
+            }
+        }
+        for (DbFile aDbFileList : dbFileList) {
             FileWithUserVo vo = new FileWithUserVo();
-            vo.buildFile(dbFileList.get(i));
-            vo.buildUser(users.get(i));
+            vo.buildFile(aDbFileList);
+            vo.buildUser(userMap.get(aDbFileList.getUid()));
             result.add(vo);
         }
-
         return result;
 
     }
