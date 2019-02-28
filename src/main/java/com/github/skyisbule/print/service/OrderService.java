@@ -44,7 +44,7 @@ public class OrderService {
         User user;
         try {
             user = userService.getUser(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new GlobalException(e.getMessage());
         }
         checkOrderInfo(order);
@@ -55,50 +55,52 @@ public class OrderService {
         return "创建订单成功";
     }
 
-    public ArrayList<OrderWithShopVO> get(Integer page,Integer pageSize,Integer type) throws GlobalException {
+    public ArrayList<OrderWithShopVO> get(Integer page, Integer pageSize, Integer type) throws GlobalException {
         User user;
         try {
             user = userService.getUser(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new GlobalException(e.getMessage());
         }
         final int SELECT_UID = 0;
         final int SELECT_SID = 1;
-        if (page == null) page=0;
-        if (pageSize == null) pageSize=10;
+        if (page == null) page = 0;
+        if (pageSize == null) pageSize = 10;
         if (type == null) type = 0;
         OrderExample e = new OrderExample();
-        e.setOffset((long)page*pageSize);
+        e.setOffset((long) page * pageSize);
         e.setLimit(pageSize);
-        if (type == SELECT_UID){
+        if (type == SELECT_UID) {
             e.createCriteria()
                     .andUidEqualTo(user.getUid());
-        }else if (type == SELECT_SID){
+        } else if (type == SELECT_SID) {
             e.createCriteria()
                     .andSidEqualTo(user.getUid());
-        }else if (user.isAdmin()){
+        } else if (user.isAdmin()) {
             e.createCriteria();
-        }else{
+        } else {
             throw new GlobalException(ErrorConstant.NO_PERMISSION);
         }
         List<Order> orders = orderDao.selectByExample(e);
         ArrayList<Integer> sIds = new ArrayList<>();
         for (Order order : orders) {
-            if (order.getSid()!=null){
+            if (order.getSid() != null) {
                 sIds.add(order.getSid());
             }
         }
-        ShopExample se = new ShopExample();
-        se.createCriteria()
-                .andSidIn(sIds);
-        List<Shop> shops = shopDao.selectByExample(se);
-        HashMap<Integer,Shop> shopHashMap = new HashMap<>();
-        for (Shop shop : shops) {
-            shopHashMap.put(shop.getSid(),shop);
+        HashMap<Integer, Shop> shopHashMap = new HashMap<>();
+        if (sIds.size() > 0) {
+            ShopExample se = new ShopExample();
+            se.createCriteria()
+                    .andSidIn(sIds);
+            List<Shop> shops = shopDao.selectByExample(se);
+            for (Shop shop : shops) {
+                shopHashMap.put(shop.getSid(), shop);
+            }
         }
         ArrayList<OrderWithShopVO> vos = new ArrayList<>();
         for (Order order : orders) {
-            if (order.getSid() != null){
+            if (order.getSid() != null) {
                 vos.add(OrderWithShopVO.build(order, shopHashMap.get(order.getSid())));
             }
         }
