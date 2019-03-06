@@ -107,4 +107,17 @@ public class OrderService {
         return vos;
     }
 
+    public String doUpdate(int oid,int status){
+        String res = "";
+        try {
+            Order order = orderDao.selectByPrimaryKey(oid);
+            order.setStatus(status);
+            orderDao.updateByPrimaryKey(order);
+            res = "success";
+        }catch (Exception e){
+            res = "something error";
+        }
+        return res;
+    }
+
 }
