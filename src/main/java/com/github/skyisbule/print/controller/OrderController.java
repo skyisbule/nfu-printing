@@ -33,13 +33,24 @@ public class OrderController {
         }
     }
 
-    @ApiOperation("查看自己提交的订单，分页，")
+    @ApiOperation("查看自己提交的订单，分页")
     @RequestMapping("/get-self")
     public BaseHttpResponse<ArrayList<OrderWithShopVO>> getSelf(@ApiParam("从0开始") Integer page,
                                                                 @ApiParam("每页的数据量") Integer pageSize,
                                                                 @ApiParam("自己提交的传0，收到的传1")Integer type) throws GlobalException {
         try{
             return new BaseHttpResponse<>(orderService.get(page,pageSize,type));
+        }catch (Exception e){
+            throw new GlobalException(e.getMessage());
+        }
+    }
+
+    @ApiOperation("更新订单状态")
+    @RequestMapping("/update-status")
+    public BaseHttpResponse<String> getSelf(@ApiParam("订单id") int oid,
+                                            @ApiParam("状态") int status) throws GlobalException {
+        try{
+            return new BaseHttpResponse<>(orderService.doUpdate(oid,status));
         }catch (Exception e){
             throw new GlobalException(e.getMessage());
         }

@@ -44,12 +44,14 @@ public class FileWithUserVo {
         this.wechat   = user.getWechat();
         this.telNum   = user.getTelNum();
         this.openShop = user.getOpenShop();
+        this.uid = user.getUid();
     }
 
     public void buildFile(DbFile file){
         this.fid = file.getFid();
         this.fileName = file.getFileName();
         this.fileUrl  = file.getFileUrl();
+        this.uploadTime = file.getUploadTime();
     }
 
     public Integer getUid() {
