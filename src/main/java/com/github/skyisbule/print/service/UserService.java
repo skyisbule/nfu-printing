@@ -26,6 +26,11 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public synchronized User doRegister(User user,HttpServletResponse response) throws GlobalException {
+        if (user.getNickName() == null || user.getPasswd() ==null){
+            throw new GlobalException("用户名密码不能为空");
+        }
+        if (user.getHeadPic() == null)
+            user.setHeadPic("https://pic.warehouse.saiwoyun.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181204140127.jpg");
         user.setUid(null);
         user.setOpenShop(0);
         UserExample e = new UserExample();
