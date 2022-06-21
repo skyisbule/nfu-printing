@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.locales>zh_CN</project.build.locales>
         <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
-        <mysql-connector>5.1.39</mysql-connector>
+        <mysql-connector>8.0.28</mysql-connector>
         <swagger.version>2.6.1</swagger.version>
         <swagger.doxc.version>1.0.6</swagger.doxc.version>
     </properties>
